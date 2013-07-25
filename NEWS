@@ -1,0 +1,7 @@
+2013-06-25
+	After the monolithic Bypass library began to evolve at its natural pace,
+	it became apparent that three distinct modules existed. One dedicated to
+	each platform (Android and iOS) and the shared core. The core code was
+	extracted and now consists of Natacha Kerensikova's markdown parser,
+	libsoldout, and Uncodin's code that takes the result of parsing and forms
+	an intermediary tree structure.
