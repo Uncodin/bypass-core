@@ -33,5 +33,6 @@ src/Makefile.in
 test/Makefile
 test/Makefile.in
 test/*.test.c
+test/*.test.cpp
 tags
 *~
