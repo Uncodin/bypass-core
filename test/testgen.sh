@@ -1,4 +1,4 @@
-#! /usr/bin/env sh -e
+#! /usr/bin/env bash
 # ------------------------------------------------------------------------------
 # The MIT License (MIT)
 #
@@ -53,6 +53,8 @@
 # test suite per supplied C module (where a module is passed to this script as
 # an argument).
 # ------------------------------------------------------------------------------
+
+set -e
 
 function printHeader {
 declare module=${1}
