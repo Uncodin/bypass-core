@@ -14,6 +14,7 @@
 //  limitations under the License.
 //
 
+#include <algorithm>
 #include <string>
 #include <stdio.h>
 #include "element.h"
