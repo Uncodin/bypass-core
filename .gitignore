@@ -36,3 +36,4 @@ test/*.test.c
 test/*.test.cpp
 tags
 *~
+doxygen-doc
