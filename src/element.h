@@ -56,32 +56,126 @@ namespace Bypass {
 		STRIKETHROUGH   = 0x115
 	};
 
+	/*!
+	 \brief An object that describes some portion of a markdown document.
+
+	 The portion of the markdown that it represents depends on what the given
+	 text is surrounded with. For example, `*this*` would produce an emphasized
+	 word that would in turn be rendered in italics.
+
+	 */
 	class Element {
 	public:
+
+		/*!
+		 \brief The type of a collection of attributes; essentially a collection of
+		        name-value pairs.
+		 */
 		typedef std::map<std::string, std::string> AttributeMap;
 
+		/*!
+		 \brief Creates a new `Element`.
+		 */
 		Element();
+
+		/*!
+		 \brief Destroys the `Element`.
+		 */
 		~Element();
 
 		std::string text;
 
+		/*!
+		 \brief Sets the text for this `Element`.
+		 \param text The actual text to set for this `Element`.
+		 */
 		void setText(const std::string& text);
+
+		/*!
+		 \brief Returns the text of this `element`.
+		 */
 		const std::string& getText();
 
+		/*!
+		 \brief Adds an attribute to this `Element`.
+
+		 The term "attribute" was intentionally borrowed from the world of HTML,
+		 even though the resultant `Document` will not be rendered as HTML. This
+		 was done so that a unified language could be succinctly defined and
+		 easily understood.
+
+		 \param name The name or LHS of the attribute.
+		 \param value The value of RHS of the attribute.
+		 */
 		void addAttribute(const std::string& name, const std::string& value);
+
+		/*!
+		 \brief Gets an attribute by name.
+		 \param name The name of the attribute to return.
+		 \return The value of the named attribute.
+		 */
 		std::string getAttribute(const std::string& name);
 
+		/*!
+		 \brief Gets an iterator pointing to the first attribute.
+		 */
 		AttributeMap::iterator attrBegin();
+
+		/*!
+    	 \brief Gets an iterator pointing to the last attributr.
+		 */
 		AttributeMap::iterator attrEnd();
+
+		/*!
+ 		 \brief gets the number of attributes.
+		 */
 		size_t attrSize() const;
 
+		/*!
+		 \brief Appends a block element to this element.
+		 \param blockElement The block element to nest within this element.
+		 */
 		void append(const Element& blockElement);
+
+		/*!
+		 \brief Gets a child `Element` of this `Element`.
+		 \param i The index of the child to retrieve.
+		 \return The child.
+		 */
 		Element getChild(size_t i);
+
+		/*!
+		 \brief Gets a child `Element` of this `Element`.
+		 \param i The index of the child to retrieve.
+		 \return The child.
+		 */
 		Element operator[](size_t i);
+
+		/*!
+		 \brief Sets the type of this `Dlement`.
+		 \param type The type of this `Element`.
+		 */
 		void setType(Type type);
+
+		/*!
+		 \brief Gets the type of this element.
+		 \return The `Type` of this element.
+		 */
 		Type getType();
+
+		/*!
+		 \brief Indicates whether or not this element is a block element.
+		 */
 		bool isBlockElement();
+
+		/*!
+		 \brief Indicates whether or not this element is a span element.
+		 */
 		bool isSpanElement();
+
+		/*!
+		 \brief The number of children this particular `Element` has.
+		 */
 		size_t size();
 		friend std::ostream& operator<<(std::ostream& out, const Element& element);
 	private:

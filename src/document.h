@@ -24,13 +24,13 @@ namespace Bypass
 {
 
 	/*!
-	 \brief An object that server as the root of a markdown `Element` tree.
+	 \brief An object that serves as the root of a markdown `Element` tree.
 	 */
 	class Document
 	{
 	public:
 		/*!
-		 \brief Creates a new `Docuement`.
+		 \brief Creates a new `Document`.
 		 */
 		Document();
 
