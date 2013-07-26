@@ -1,7 +1,8 @@
 Bypass Core {#mainpage}
 ===========
 
-*The homepage for this project is [located here](http://uncodin.github.io/bypass/).*
+*The homepage for this project is [availble here](http://uncodin.github.io/bypass/).
+API documentation is [available here](http://uncodin.github.io/bypass-core).*
 
 ## Introduction
 
