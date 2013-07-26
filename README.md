@@ -44,3 +44,7 @@ commands:
     autoreconf --install
     ./configure
     make check
+
+Additionally, you can generate the documentation with:
+
+    make doxygen-doc

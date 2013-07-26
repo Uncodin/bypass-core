@@ -1,8 +1,6 @@
 // -*- Mode: C; c-file-style: "k&r" -*-
 //
 // sut_test.h
-// Copyright (C) 2012 Damian Carrillo
-//
 // The MIT License (MIT)
 //
 // Copyright (c) 2012 Damian Carrillo
