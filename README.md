@@ -1,4 +1,5 @@
-# Bypass Core
+Bypass Core {#mainpage}
+===========
 
 *The homepage for this project is [located here](http://uncodin.github.io/bypass/).*
 
