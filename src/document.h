@@ -22,13 +22,40 @@
 
 namespace Bypass
 {
+
+	/*!
+	 \brief An object that server as the root of a markdown `Element` tree.
+	 */
 	class Document
 	{
 	public:
+		/*!
+		 \brief Creates a new `Docuement`.
+		 */
 		Document();
+
+		/*!
+		 \brief Destroys the `Document`.
+		 */
 		~Document();
-		void append(const Element& elements);
+
+		/*!
+		 \brief Appends the given element to the tail of this document.
+		 \param element The element to append to the tail.
+		 */
+		void append(const Element& element);
+
+		/*!
+		 \brief Allows for sequentially accessing elements in this `Document` tree.
+		 \param i The index of the element to retrieve.
+		 \return Element The element at the given index.
+		 */
 		Element operator[](size_t i);
+
+		/*!
+	     \brief Indicates the number of elements in this `Document`.
+	     \return The number of elements.
+		 */
 		size_t size();
 	private:
 		std::vector<Element> elements;
