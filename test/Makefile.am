@@ -19,16 +19,16 @@ CLEANFILES = *.test.cpp
 check_PROGRAMS = element.test document.test parser.test
 
 element_test_SOURCES = sut_test.cpp element.test.cpp $(top_srcdir)/src/element.h
-element_test_CXXFLAGS = -I$(top_srcdir)/src -I$(top_srcdir)/src/soldout
+element_test_CXXFLAGS = -I$(top_srcdir)/src
 element_test_LDADD = $(top_srcdir)/src/libbypass.a
 element_test_LIBS = -libbypass
 
 document_test_SOURCES = sut_test.cpp document.test.cpp $(top_srcdir)/src/document.h
-document_test_CXXFLAGS = -I$(top_srcdir)/src -I$(top_srcdir)/src/soldout
+document_test_CXXFLAGS = -I$(top_srcdir)/src
 document_test_LDADD = $(top_srcdir)/src/libbypass.a
 document_test_LIBS = -libbypass
 
 parser_test_SOURCES = sut_test.cpp parser.test.cpp $(top_srcdir)/src/parser.h
-parser_test_CXXFLAGS = -I$(top_srcdir)/src -I$(top_srcdir)/src/soldout
+parser_test_CXXFLAGS = -I$(top_srcdir)/src
 parser_test_LDADD = $(top_srcdir)/src/libbypass.a $(top_srcdir)/src/soldout/libsoldout.a
 parser_test_LIBS = -libbypass -libsoldout
