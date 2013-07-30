@@ -28,7 +28,7 @@
 #include "element.h"
 
 extern "C" {
-#include "markdown.h"
+#include "soldout/markdown.h"
 }
 
 #include "document.h"
