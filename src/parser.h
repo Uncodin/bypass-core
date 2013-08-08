@@ -254,6 +254,19 @@ namespace Bypass {
 		  */
 		int parsedLink(struct buf *ob, struct buf *link, struct buf *title, struct buf *content);
 
+        /*!
+		 \brief Handles an [autolink](http://daringfireball.net/projects/markdown/syntax#autolink)
+         parser callback.
+
+         A `autolink` element is a span element.
+
+         \param ob The designated output buffer.
+         \param link The URL for the link.
+         \param type The type of the detected autolink.
+         \return whether or not the callback was handled
+         */
+		int parsedAutolink(struct buf *ob, struct buf *link, enum mkd_autolink type);
+
 		// Low Level Callbacks
 
 		/*!
