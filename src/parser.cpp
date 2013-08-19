@@ -223,9 +223,8 @@ namespace Bypass {
         if (type == AUTOLINK) {
             Element element;
 			element.setType(type);
-            if (text != NULL && text->size) {
-                element.addAttribute("link", std::string(text->data, text->data + text->size));
-            }
+            element.setText(textString);
+            element.addAttribute("link", textString);
 
 			createSpan(element, ob);
 		} else if (strs.size() > 0) {
@@ -310,9 +309,6 @@ namespace Bypass {
 	}
 
     int Parser::parsedAutolink(struct buf *ob, struct buf *link, enum mkd_autolink type) {
-        // add an Element with the given text to the elementSoup
-        parsedNormalText(ob, link);
-
         if (type != MKDA_NOT_AUTOLINK) {
             handleSpan(AUTOLINK, ob, link, NULL, NULL, false);
             return 1;
