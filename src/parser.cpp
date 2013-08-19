@@ -30,6 +30,7 @@ static int rndr_emphasis(struct buf *ob, struct buf *text, char c, void *opaque)
 static int rndr_triple_emphasis(struct buf *ob, struct buf *text, char c, void *opaque);
 static int rndr_linebreak(struct buf *ob, void *opaque);
 static int rndr_link(struct buf *ob, struct buf *link, struct buf *title, struct buf *content, void *opaque);
+static int rndr_autolink(struct buf *ob, struct buf *link, enum mkd_autolink type, void *opaque);
 static void rndr_normal_text(struct buf *ob, struct buf *text, void *opaque);
 
 struct mkd_renderer mkd_callbacks = {
@@ -51,7 +52,7 @@ struct mkd_renderer mkd_callbacks = {
 	NULL,                 // table row
 
 	/* span-level callbacks */
-	NULL,                 // autolink
+	rndr_autolink,        // autolink
 	rndr_codespan,        // codespan
 	rndr_double_emphasis, // double emphasis
 	rndr_emphasis,        // emphasis
@@ -211,7 +212,6 @@ namespace Bypass {
 	// Span Element Callbacks
 
 	void Parser::handleSpan(Type type, struct buf *ob, struct buf *text, struct buf *extra, struct buf *extra2, bool output) {
-
 		std::vector<std::string> strs;
 		std::string textString;
 
@@ -220,7 +220,14 @@ namespace Bypass {
 			split(strs, textString, '|');
 		}
 
-		if (strs.size() > 0) {
+        if (type == AUTOLINK) {
+            Element element;
+			element.setType(type);
+            element.setText(textString);
+            element.addAttribute("link", textString);
+
+			createSpan(element, ob);
+		} else if (strs.size() > 0) {
 			std::string str0 = strs[0];
 
 			if (str0.length() > 0) {
@@ -230,17 +237,15 @@ namespace Bypass {
 				Element element = elit->second;
 				element.setType(type);
 
-				if (extra != NULL && extra->size) {
-					if (element.getType() == LINK) {
-						element.addAttribute("link", std::string(extra->data, extra->data + extra->size));
-					}
-				}
+                if (element.getType() == LINK) {
+                    if (extra != NULL && extra->size) {
+                        element.addAttribute("link", std::string(extra->data, extra->data + extra->size));
+                    }
 
-				if (extra2 != NULL && extra2->size) {
-					if (element.getType() == LINK) {
-						element.addAttribute("title", std::string(extra2->data, extra2->data + extra2->size));
-					}
-				}
+                    if (extra2 != NULL && extra2->size) {
+                        element.addAttribute("title", std::string(extra2->data, extra2->data + extra2->size));
+                    }
+                }
 
 				elementSoup.erase(pos);
 				if (output) {
@@ -302,6 +307,15 @@ namespace Bypass {
 		handleSpan(LINK, ob, content, link, title);
 		return 1;
 	}
+
+    int Parser::parsedAutolink(struct buf *ob, struct buf *link, enum mkd_autolink type) {
+        if (type != MKDA_NOT_AUTOLINK) {
+            handleSpan(AUTOLINK, ob, link, NULL, NULL, false);
+            return 1;
+        }
+
+        return 0;
+    }
 
 	int Parser::parsedCodeSpan(struct buf *ob, struct buf *text) {
 		if (text && text->size > 0) {
@@ -385,6 +399,10 @@ static int rndr_linebreak(struct buf *ob, void *opaque) {
 
 static int rndr_link(struct buf *ob, struct buf *link, struct buf *title, struct buf *content, void *opaque) {
 	return ((Bypass::Parser*) opaque)->parsedLink(ob, link, title, content);
+}
+
+static int rndr_autolink(struct buf *ob, struct buf *link, enum mkd_autolink type, void *opaque) {
+    return ((Bypass::Parser*) opaque)->parsedAutolink(ob, link, type);
 }
 
 //	Low Level Callbacks
