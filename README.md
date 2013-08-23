@@ -50,3 +50,9 @@ commands:
 Additionally, you can generate the documentation with:
 
     make doxygen-doc
+
+### Mac OS X
+
+In order to build and run the tests, you may find that you need newer versions
+of the Autotools than what are shipped with Xcode. The process I use [can be
+found here](https://www.evernote.com/shard/s55/sh/0099776b-577c-4697-a56e-477a70558804/e34ef1c4b09cfa2ee84883dc6b70a15f).
