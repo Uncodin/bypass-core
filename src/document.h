@@ -14,8 +14,8 @@
 //  limitations under the License.
 //
 
-#ifndef _BYPASS_DOCUMENT_H_
-#define _BYPASS_DOCUMENT_H_
+#ifndef BYPASS_DOCUMENT_H
+#define BYPASS_DOCUMENT_H
 
 #include <vector>
 #include "element.h"
@@ -62,4 +62,4 @@ namespace Bypass
 	};
 }
 
-#endif // _BYPASS_DOCUMENT_H_
+#endif // BYPASS_DOCUMENT_H
